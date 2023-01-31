@@ -28,13 +28,13 @@ pub struct NpmPackageVersion {
     pub homepage: String,
     pub repository: Option<NpmPackageRepository>,
     pub dependencies: Option<HashMap<String, String>>,
-    #[serde(rename = "devDependencies")]
+    #[serde(alias = "devDependencies")]
     pub dev_dependencies: Option<HashMap<String, String>>,
     pub scripts: HashMap<String, String>,
     pub author: NpmPackageAuthor,
     pub license: Option<String>,
     pub readme: Option<String>,
-    #[serde(rename = "readmeFilename")]
+    #[serde(alias = "readmeFilename")]
     pub readme_filename: Option<String>,
     pub _id: String,
     pub description: String,
@@ -143,5 +143,24 @@ mod tests {
         let package = client.get("webpacksadfas").await;
 
         assert!(package.is_err());
+    }
+
+    #[test]
+    fn test_npm_version_field_serde() {
+        let client = SyncNpmClient::new();
+        let package = client.get("webpack").unwrap();
+
+        assert_eq!(
+            package.versions["5.0.0"]._npm_version,
+            Some("6.14.8".to_string())
+        );
+    }
+
+    #[test]
+    fn test_readme_version_filename_return_none_serde() {
+        let client = SyncNpmClient::new();
+        let package = client.get("webpack").unwrap();
+
+        assert_eq!(package.versions["5.0.0"].readme_filename, None);
     }
 }
