@@ -1,7 +1,7 @@
 [package]
 name = "npm-package"
 description = "A simple client for fetching metadata from the npm package"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 
