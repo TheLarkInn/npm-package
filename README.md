@@ -2,7 +2,7 @@
 A very light-weight sync and async client for fetching metadata from the npm registry for a npm package. 
 
 ## Usage
-These examples come from our [examples]('examples/) folder
+These examples come from our [examples](examples/) folder
 
 ### Using the Async Client
 ```rust
